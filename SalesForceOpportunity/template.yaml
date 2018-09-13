@@ -1,0 +1,32 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+    SalesForceOpportunity
+
+    Sample SAM Template for SalesForceOpportunity
+    
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+    Function:
+        Timeout: 3
+
+
+Resources:
+
+    SalesForceAPIFunction:
+        Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+        Properties:
+            CodeUri: salesforceapilambda/
+            Handler: app.lambda_handler
+            Runtime: nodejs8.10
+            Timeout: 30
+            Environment:
+                Variables:
+                    SFUNAME: "patvin80@yahoo.com"
+                    SFPASSWORD: "Admin123!"
+
+Outputs:
+
+    SalesForceAPIFunction:
+      Description: "Sales Force API Lambda Function ARN"
+      Value: !GetAtt SalesForceAPIFunction.Arn
